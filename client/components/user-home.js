@@ -1,31 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import Order from './order'
+import MyOrders from './myOrders'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
   const {email} = props
-  const {orders} = props
 
   return (
     <div>
       <h3>Welcome, {email}</h3>
       <div>
         <h3>MY ORDERS</h3>
-        {/* <ul>
-          {orders.map &&
-            orders.map(order => {
-              return (
-                <li key={order.id}>
-                  Order Number: {order.id}
-                  <Order order={order} />
-                </li>
-              )
-            })}
-        </ul> */}
+        <MyOrders />
       </div>
     </div>
   )
