@@ -15,7 +15,7 @@ export const UserHome = props => {
       <h3>Welcome, {email}</h3>
       <div>
         <h3>MY ORDERS</h3>
-        <ul>
+        {/* <ul>
           {orders.map &&
             orders.map(order => {
               return (
@@ -25,7 +25,7 @@ export const UserHome = props => {
                 </li>
               )
             })}
-        </ul>
+        </ul> */}
       </div>
     </div>
   )

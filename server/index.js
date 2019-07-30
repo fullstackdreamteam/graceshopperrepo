@@ -11,7 +11,6 @@ const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
 const Order = require('../server/db/models/order')
-const ProductItem = require('../server/db/models/productItem')
 const ProductType = require('../server/db/models/productType')
 module.exports = app
 
@@ -39,13 +38,7 @@ passport.deserializeUser(async (id, done) => {
     const user = await db.models.user.findOne({
       where: {
         id: id
-      },
-      include: [
-        {
-          model: Order,
-          include: {model: ProductItem, include: {model: ProductType}}
-        }
-      ]
+      }
     })
     done(null, user)
   } catch (err) {

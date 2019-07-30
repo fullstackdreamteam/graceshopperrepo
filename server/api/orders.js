@@ -1,13 +1,33 @@
 const router = require('express').Router()
-const {Order, User, ProductType, ProductItem} = require('../db/models')
+const {Order, User, ProductType} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   const orders = await Order.findAll({
-    include: [
-      {model: User},
-      {model: ProductItem, include: {model: ProductType}}
-    ]
+    include: [{model: User}, {model: ProductType}]
   })
   res.json(orders)
+})
+
+// Thunk THis
+router.get('/pastOrders', async (req, res, next) => {
+  const items = await Order.findAll({
+    where: {
+      userId: req.user.id,
+      completed: true
+    },
+    include: [{model: ProductType}]
+  })
+  res.json(items)
+})
+
+router.get('/cart', async (req, res, next) => {
+  const items = await Order.findAll({
+    where: {
+      userId: req.user.id,
+      completed: false
+    },
+    include: [{model: ProductType}]
+  })
+  res.json(items)
 })

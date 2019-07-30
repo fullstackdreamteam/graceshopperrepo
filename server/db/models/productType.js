@@ -14,8 +14,14 @@ const ProductType = db.define('productType', {
   description: {
     type: Sequelize.STRING
   },
+  price: {
+    type: Sequelize.FLOAT
+  },
   imageUrl: {
     type: Sequelize.STRING
+  },
+  stock: {
+    type: Sequelize.INTEGER
   }
 })
 
