@@ -3,19 +3,19 @@ const db = require('../db')
 
 const ProductType = db.define('productType', {
   brand: {
-    type: Sequelize.STRING
+    type: Sequelize.ENUM
   },
   modelName: {
     type: Sequelize.STRING
   },
   length: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER
   },
   description: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   price: {
-    type: Sequelize.FLOAT
+    type: Sequelize.INTEGER
   },
   imageUrl: {
     type: Sequelize.STRING
@@ -24,5 +24,5 @@ const ProductType = db.define('productType', {
     type: Sequelize.INTEGER
   }
 })
-
+// Instace methods for price -> convert to dollar
 module.exports = ProductType

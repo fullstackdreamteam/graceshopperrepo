@@ -8,4 +8,6 @@ const Order = db.define('order', {
   }
 })
 
+// Add Total price to the model?
+
 module.exports = Order

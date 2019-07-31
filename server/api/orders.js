@@ -7,7 +7,7 @@ router.get('/', async (req, res, next) => {
     include: [{model: User}, {model: ProductType}]
   })
   res.json(orders)
-})
+}) //add conditional (when admin is true)
 
 // Thunk THis
 router.get('/pastOrders', async (req, res, next) => {
@@ -31,3 +31,5 @@ router.get('/cart', async (req, res, next) => {
   })
   res.json(items)
 })
+
+// Store guest cart
