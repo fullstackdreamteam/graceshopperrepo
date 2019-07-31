@@ -11,16 +11,17 @@ class MyOrders extends Component {
     this.props.getAsyncOrders()
   }
   render() {
-    let {orders} = this.props
+    let orders = this.props.orders
 
     return (
       <div>
+        <h1>My Past Orders</h1>
         <table>
           <tbody>
             <tr>
               <th>Order #</th>
               <th>Brand</th>
-              <th>Make</th>
+              <th>Model Name</th>
               <th>Length</th>
               <th>Description</th>
               <th>Price</th>
@@ -32,9 +33,9 @@ class MyOrders extends Component {
                     <td>{order.id}</td>
                     {order.productTypes.map(product => {
                       return (
-                        <div>
+                        <div key={product.id}>
                           <td>{product.brand}</td>
-                          <td>{product.make}</td>
+                          <td>{product.modelName}</td>
                           <td>{product.length}</td>
                           <td>{product.description}</td>
                           <td>{product.price}</td>

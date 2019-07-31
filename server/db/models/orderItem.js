@@ -10,6 +10,9 @@ const OrderItem = db.define('order_item', {
   // },
   quantity: {
     type: Sequelize.INTEGER
+  },
+  price: {
+    type: Sequelize.INTEGER
   }
 }) //add price
 
