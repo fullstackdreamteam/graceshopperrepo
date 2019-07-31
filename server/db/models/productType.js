@@ -3,7 +3,7 @@ const db = require('../db')
 
 const ProductType = db.define('productType', {
   brand: {
-    type: Sequelize.ENUM
+    type: Sequelize.ENUM(['Toyota', 'Yamaha', 'Kawasaki', 'Yachtmaster'])
   },
   modelName: {
     type: Sequelize.STRING
