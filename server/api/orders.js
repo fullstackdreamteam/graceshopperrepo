@@ -1,8 +1,8 @@
 const router = require('express').Router()
 const {Order, User, ProductType} = require('../db/models')
-module.exports = router
+const routerGateway = require('./utils')
 
-router.get('/', async (req, res, next) => {
+router.get('/', routerGateway, async (req, res, next) => {
   const orders = await Order.findAll({
     include: [{model: User}, {model: ProductType}]
   })
@@ -33,3 +33,4 @@ router.get('/cart', async (req, res, next) => {
 })
 
 // Store guest cart
+module.exports = router

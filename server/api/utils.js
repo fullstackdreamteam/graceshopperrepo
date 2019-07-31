@@ -1,6 +1,9 @@
 const routerGateway = (req, res, next) => {
-  console.log('hello')
-  next()
+  if (req.user.isAdmin === true) {
+    next()
+  } else {
+    res.send('DENIED')
+  }
 }
 
-//export
+module.exports = routerGateway
