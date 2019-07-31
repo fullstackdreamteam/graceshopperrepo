@@ -23,7 +23,7 @@ router.get('/pastOrders', async (req, res, next) => {
 })
 
 router.get('/cart', async (req, res, next) => {
-  const items = await Order.findAll({
+  const items = await Order.findOne({
     where: {
       userId: req.user.id,
       completed: false
