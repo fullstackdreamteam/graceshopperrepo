@@ -18,6 +18,7 @@ router.get('/pastOrders', async (req, res, next) => {
     },
     include: [{model: ProductType}]
   })
+
   res.json(items)
 })
 

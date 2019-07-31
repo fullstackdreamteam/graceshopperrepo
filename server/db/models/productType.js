@@ -25,4 +25,5 @@ const ProductType = db.define('productType', {
   }
 })
 // Instace methods for price -> convert to dollar
+
 module.exports = ProductType
