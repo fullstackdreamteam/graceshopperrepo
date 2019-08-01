@@ -11,7 +11,7 @@ const EachProduct = props => {
       </h3>
       <h4>Length: {product.length}</h4>
       <h4>Price: {product.price}</h4>
-      <button type="button" id={product.id} onClick={props.clickHandler}>
+      <button type="button" id={product.id} onClick={props.toggleDetail}>
         More Details
       </button>
       {props.isCart ? (
@@ -44,7 +44,7 @@ const EachProduct = props => {
                 productTypeId: +event.target.id
               }
               console.log(obj)
-              deleteCartItem(obj)
+              props.deleteCartItem(obj)
             }}
           >
             delete
@@ -59,16 +59,7 @@ const EachProduct = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    clickHandler(event) {
-      event.preventDefault()
-      let obj = {
-        orderId: props.cart.id,
-        productTypeId: product.id,
-        quantity: parseInt(event.target.qty.value)
-      }
-      updateCartQty(obj)
-      // console.log(event.target.qty.value)
-    }
+    deleteCartItem: obj => dispatch(deleteCartItem(obj))
   }
 }
 
