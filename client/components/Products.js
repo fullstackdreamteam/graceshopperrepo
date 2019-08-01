@@ -8,12 +8,12 @@ class Products extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.clickHandler = this.clickHandler.bind(this)
+    this.toggleDetail = this.toggleDetail.bind(this)
   }
   componentDidMount() {
     this.props.getAsyncProducts()
   }
-  clickHandler(event) {
+  toggleDetail(event) {
     let id = +event.target.id
     this.props.history.push(`/products/${id}`)
   }
@@ -27,7 +27,7 @@ class Products extends Component {
               <div key={product.id}>
                 <EachProduct
                   product={product}
-                  clickHandler={this.clickHandler}
+                  toggleDetail={this.toggleDetail}
                 />
               </div>
             )
