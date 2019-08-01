@@ -17,6 +17,12 @@ export const getAsyncOrders = () => {
     dispatch(getOrders(data))
   }
 }
+
+export const addAsyncCart = obj => {
+  return async dispatch => {
+    await axios.post('/api/orders', obj)
+  }
+}
 export default function(state = userOrders, action) {
   switch (action.type) {
     case GET_ORDERS:

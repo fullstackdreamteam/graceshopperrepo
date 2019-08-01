@@ -17,6 +17,13 @@ export const getAsyncCart = () => {
     dispatch(getCart(data))
   }
 }
+export const updateCartQty = async object => {
+  await axios.put('/api/orders/cart/updateQty', object)
+}
+
+export const deleteCartItem = async object => {
+  await axios.put('/api/orders', object)
+}
 export default function(state = userCart, action) {
   switch (action.type) {
     case GET_CART:

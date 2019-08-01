@@ -1,5 +1,6 @@
 import React from 'react'
-
+import {connect} from 'react-redux'
+import {updateCartQty, deleteCartItem} from '../store/cart'
 const EachProduct = props => {
   const product = props.product
   return (
@@ -13,8 +14,62 @@ const EachProduct = props => {
       <button type="button" id={product.id} onClick={props.clickHandler}>
         More Details
       </button>
+      {props.isCart ? (
+        <div>
+          <form
+            onSubmit={event => {
+              event.preventDefault()
+              let obj = {
+                orderId: props.cart.id,
+                productTypeId: product.id,
+                quantity: parseInt(event.target.qty.value)
+              }
+              updateCartQty(obj)
+            }}
+          >
+            <label>
+              QTY:
+              <input type="number" name="qty" defaultValue={props.qty} />
+              <button type="submit">Update</button>
+            </label>
+          </form>
+          <button
+            type="button"
+            id={product.id}
+            name={props.cart.id}
+            onClick={event => {
+              event.preventDefault()
+              let obj = {
+                orderId: +event.target.name,
+                productTypeId: +event.target.id
+              }
+              console.log(obj)
+              deleteCartItem(obj)
+            }}
+          >
+            delete
+          </button>
+        </div>
+      ) : (
+        <div />
+      )}
     </div>
   )
 }
 
-export default EachProduct
+const mapDispatchToProps = dispatch => {
+  return {
+    clickHandler(event) {
+      event.preventDefault()
+      let obj = {
+        orderId: props.cart.id,
+        productTypeId: product.id,
+        quantity: parseInt(event.target.qty.value)
+      }
+      updateCartQty(obj)
+      // console.log(event.target.qty.value)
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(EachProduct)
