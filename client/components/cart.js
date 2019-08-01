@@ -21,8 +21,29 @@ class Cart extends Component {
         <p>my Cart</p>
         {this.props.cart.productTypes &&
           this.props.cart.productTypes.map(item => {
-            return <EachProduct key={item.id} product={item} />
+            return (
+              <EachProduct
+                key={item.id}
+                product={item}
+                isCart={true}
+                qty={item.order_item.quantity}
+                cart={this.props.cart}
+              />
+            )
           })}
+        <div />
+        <div>
+          <h3>
+            Total Price:
+            {this.props.cart.productTypes &&
+              this.props.cart.productTypes.reduce((acc, val) => {
+                return acc + val.price
+              }, 0)}
+            <div>
+              <button type="button">BUY</button>
+            </div>
+          </h3>
+        </div>
       </div>
     )
   }

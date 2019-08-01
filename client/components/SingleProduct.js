@@ -1,19 +1,36 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAsyncSingleProduct} from '../store/singleProduct'
+import {addAsyncCart} from '../store/orders'
+import {getAsyncCart} from '../store/cart'
 
 class SingleProduct extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      quantity: 1
+    }
+    this.clickHandler = this.clickHandler.bind(this)
   }
   componentDidMount() {
     let id = this.props.match.params.id
     this.props.getAsyncSingleProduct(id)
+    this.props.getAsyncCart()
+  }
+  clickHandler(event) {
+    event.preventDefault()
+    let obj = {
+      quantity: event.target.qty.value,
+      price: this.props.singleProduct.price,
+      orderId: this.props.cart.id,
+      productTypeId: this.props.singleProduct.id
+    }
+    this.props.addAsyncCart(obj)
   }
   render() {
     return (
       <div>
+        <p>{this.state.price}</p>
         <img src={this.props.singleProduct.imageUrl} style={{width: '50%'}} />
         <h3>
           {this.props.singleProduct.brand} {this.props.singleProduct.modelName}
@@ -22,9 +39,15 @@ class SingleProduct extends Component {
         <h4>Price: {this.props.singleProduct.price}</h4>
         <h5>Description:</h5>
         <h5>{this.props.singleProduct.description}</h5>
-        <button type="button" id={this.props.singleProduct.id}>
-          Add to Cart
-        </button>
+        <form onSubmit={this.clickHandler}>
+          <label>
+            QTY:
+            <input type="number" name="qty" />
+          </label>
+          <button type="submit" id={this.props.singleProduct.id}>
+            Add to Cart
+          </button>
+        </form>
       </div>
     )
   }
@@ -32,13 +55,16 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.singleProduct
+    singleProduct: state.singleProduct,
+    cart: state.cart
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAsyncSingleProduct: id => dispatch(getAsyncSingleProduct(id))
+    getAsyncSingleProduct: id => dispatch(getAsyncSingleProduct(id)),
+    addAsyncCart: obj => dispatch(addAsyncCart(obj)),
+    getAsyncCart: () => dispatch(getAsyncCart())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
