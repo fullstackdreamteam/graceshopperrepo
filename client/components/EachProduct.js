@@ -24,7 +24,7 @@ const EachProduct = props => {
                 productTypeId: product.id,
                 quantity: parseInt(event.target.qty.value)
               }
-              updateCartQty(obj)
+              props.updateCartQty(obj)
             }}
           >
             <label>
@@ -59,7 +59,8 @@ const EachProduct = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteCartItem: obj => dispatch(deleteCartItem(obj))
+    deleteCartItem: obj => dispatch(deleteCartItem(obj)),
+    updateCartQty: obj => dispatch(updateCartQty(obj))
   }
 }
 

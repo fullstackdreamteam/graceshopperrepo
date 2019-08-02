@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const GET_CART = 'GET_CART'
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
+const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM'
 
 const userCart = {}
 
@@ -12,10 +13,19 @@ const getCart = cart => {
   }
 }
 
-const deleteCartSingleItem = id => {
+const deleteCartSingleItem = (id, obj) => {
+  console.log(obj)
   return {
     type: DELETE_CART_ITEM,
-    id
+    id,
+    obj
+  }
+}
+
+const updateCartQtyAction = obj => {
+  return {
+    type: UPDATE_CART_ITEM,
+    obj
   }
 }
 
@@ -25,14 +35,17 @@ export const getAsyncCart = () => {
     dispatch(getCart(data))
   }
 }
-export const updateCartQty = async object => {
-  await axios.put('/api/orders/cart/updateQty', object)
+export const updateCartQty = object => {
+  return async dispatch => {
+    const {data} = await axios.put('/api/orders/cart/updateQty', object)
+    dispatch(updateCartQtyAction(data))
+  }
 }
 
 export const deleteCartItem = object => {
   return async dispatch => {
-    await axios.put('/api/orders', object)
-    dispatch(deleteCartSingleItem(object.productTypeId))
+    const {data} = await axios.put('/api/orders', object)
+    dispatch(deleteCartSingleItem(object.productTypeId, data))
   }
 }
 export default function(state = userCart, action) {
@@ -42,8 +55,11 @@ export default function(state = userCart, action) {
     case DELETE_CART_ITEM:
       return {
         ...state,
-        productTypes: state.productTypes.filter(item => item.id !== action.id)
+        productTypes: state.productTypes.filter(item => item.id !== action.id),
+        total: action.obj.total
       }
+    case UPDATE_CART_ITEM:
+      return action.obj
     default:
       return state
   }

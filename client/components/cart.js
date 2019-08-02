@@ -35,10 +35,7 @@ class Cart extends Component {
         <div>
           <h3>
             Total Price:
-            {this.props.cart.productTypes &&
-              this.props.cart.productTypes.reduce((acc, val) => {
-                return acc + val.price
-              }, 0)}
+            {this.props.cart.total}
             <div>
               <button type="button">BUY</button>
             </div>
