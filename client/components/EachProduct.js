@@ -43,7 +43,6 @@ const EachProduct = props => {
                 orderId: +event.target.name,
                 productTypeId: +event.target.id
               }
-              console.log(obj)
               props.deleteCartItem(obj)
             }}
           >

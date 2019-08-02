@@ -6,4 +6,4 @@ const routerGateway = (req, res, next) => {
   }
 }
 
-module.exports = routerGateway
+module.exports = {routerGateway}

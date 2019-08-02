@@ -6,11 +6,28 @@ import EachProduct from './EachProduct'
 class Cart extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      total: 0
+    }
+    //this.setTotal = this.setTotal.bind(this)
   }
   componentDidMount() {
     this.props.getAsyncCart()
+    this.setState({
+      total: this.props.cart.total
+    })
   }
+
+  // setTotal() {
+  //   let totalVal =
+  //     this.props.cart.productTypes &&
+  //     this.props.cart.productTypes.reduce((acc, val) => {
+  //       return acc + val.price * val.order_item.quantity
+  //     }, this.state.total)
+  //   console.log(totalVal)
+  //   this.setState({total: totalVal})
+  // }
+
   render() {
     //  let productTypes = Array(cart.productTypes)
 
@@ -35,10 +52,7 @@ class Cart extends Component {
         <div>
           <h3>
             Total Price:
-            {this.props.cart.productTypes &&
-              this.props.cart.productTypes.reduce((acc, val) => {
-                return acc + val.price
-              }, 0)}
+            {this.props.cart.total}
             <div>
               <button type="button">BUY</button>
             </div>

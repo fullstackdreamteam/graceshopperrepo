@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Order, User, ProductType, OrderItem} = require('../db/models')
-const routerGateway = require('./utils')
+const {routerGateway} = require('./utils')
 
 router.get('/', routerGateway, async (req, res, next) => {
   const orders = await Order.findAll({
@@ -14,7 +14,6 @@ router.post('/', async (req, res, next) => {
   res.sendStatus(201)
 })
 
-// Thunk THis
 router.get('/pastOrders', async (req, res, next) => {
   const items = await Order.findAll({
     where: {
@@ -26,7 +25,9 @@ router.get('/pastOrders', async (req, res, next) => {
 
   res.json(items)
 })
-
+// Reduce Price
+// Add a prop to a object
+// Send that object
 router.get('/cart', async (req, res, next) => {
   const items = await Order.findOne({
     where: {
@@ -35,7 +36,14 @@ router.get('/cart', async (req, res, next) => {
     },
     include: [{model: ProductType}]
   })
-  res.json(items)
+
+  let totalVal = items.productTypes.reduce((acc, val) => {
+    return acc + val.price * val.order_item.quantity
+  }, 0)
+
+  let newCartObj = items
+  newCartObj.dataValues.total = totalVal
+  res.json(newCartObj)
 })
 
 router.put('/cart/updateQty', async (req, res, next) => {
