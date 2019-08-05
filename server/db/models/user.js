@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
-const order = require('./order')
+const Order = require('./order')
 
 const User = db.define('user', {
   email: {
@@ -68,9 +68,9 @@ const setSaltAndPassword = user => {
   }
 }
 
-const autoCart = async user => {
-  await order.create({
-    userId: user.id
+const autoCart = user => {
+  Order.create({
+    userId: +user.id
   })
 }
 

@@ -18,7 +18,7 @@ class Cart extends Component {
 
     return (
       <div>
-        <p>my Cart</p>
+        <h3>My Cart</h3>
         {this.props.cart.productTypes &&
           this.props.cart.productTypes.map(item => {
             return (
