@@ -13,8 +13,12 @@ const getSingleProduct = product => {
 
 export const getAsyncSingleProduct = id => {
   return async dispatch => {
-    const {data} = await axios.get(`/api/products/${id}`)
-    dispatch(getSingleProduct(data))
+    try {
+      const {data} = await axios.get(`/api/products/${id}`)
+      dispatch(getSingleProduct(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 export default function(state = singleProduct, action) {

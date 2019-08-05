@@ -29,23 +29,31 @@ const Order = db.define('order', {
 // }
 
 Order.prototype.calTotal = async function() {
-  const itemsList = await OrderItem.findAll({
-    where: {
-      orderId: this.id
-    },
-    include: [{model: ProductType}]
-  })
-  //console.log(itemsList[0].productType.price)
-  let totalVal = itemsList.reduce((acc, val) => {
-    return acc + val.productType.price * val.quantity
-  }, 0)
-  this.total = totalVal
-  await this.save()
+  try {
+    const itemsList = await OrderItem.findAll({
+      where: {
+        orderId: this.id
+      },
+      include: [{model: ProductType}]
+    })
+    //console.log(itemsList[0].productType.price)
+    let totalVal = itemsList.reduce((acc, val) => {
+      return acc + val.productType.price * val.quantity
+    }, 0)
+    this.total = totalVal
+    await this.save()
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 const newCart = async order => {
-  if (order.completed) {
-    await Order.create({userId: order.userId})
+  try {
+    if (order.completed) {
+      await Order.create({userId: order.userId})
+    }
+  } catch (error) {
+    console.error(error)
   }
 }
 

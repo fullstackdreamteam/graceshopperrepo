@@ -3,13 +3,21 @@ const {ProductType} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  const products = await ProductType.findAll()
-  res.json(products)
+  try {
+    const products = await ProductType.findAll()
+    res.json(products)
+  } catch (error) {
+    next(error)
+  }
 })
 
 router.get('/:id', async (req, res, next) => {
-  const singleProduct = await ProductType.findOne({
-    where: {id: req.params.id}
-  })
-  res.json(singleProduct)
+  try {
+    const singleProduct = await ProductType.findOne({
+      where: {id: req.params.id}
+    })
+    res.json(singleProduct)
+  } catch (error) {
+    next(error)
+  }
 })

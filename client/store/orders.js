@@ -16,20 +16,32 @@ const getOrders = orders => {
 
 export const getAsyncOrders = () => {
   return async dispatch => {
-    const {data} = await axios.get('/api/orders/pastOrders')
-    dispatch(getOrders(data))
+    try {
+      const {data} = await axios.get('/api/orders/pastOrders')
+      dispatch(getOrders(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
 export const asyncBuy = id => {
   return async dispatch => {
-    await axios.put('/api/orders/buy', id)
+    try {
+      await axios.put('/api/orders/buy', id)
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
 export const addAsyncCart = obj => {
   return async dispatch => {
-    await axios.post('/api/orders', obj)
+    try {
+      await axios.post('/api/orders', obj)
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 export default function(state = userOrders, action) {
