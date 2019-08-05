@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAsyncCart} from '../store/cart'
 import EachProduct from './EachProduct'
+import {asyncBuy} from '../store/orders'
 
 class Cart extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Cart extends Component {
   }
   render() {
     //  let productTypes = Array(cart.productTypes)
-
+    console.log(this.props.cart.id)
     //console.log(this.props.cart)
 
     return (
@@ -37,7 +38,15 @@ class Cart extends Component {
             Total Price:
             {this.props.cart.total}
             <div>
-              <button type="button">BUY</button>
+              <button
+                type="button"
+                onClick={() => {
+                  this.props.asyncBuy({orderId: this.props.cart.id})
+                  this.props.history.push('/completed')
+                }}
+              >
+                BUY
+              </button>
             </div>
           </h3>
         </div>
@@ -51,7 +60,10 @@ const mapStatetoProps = state => {
 }
 
 const mapDispatchtoProps = dispatch => {
-  return {getAsyncCart: () => dispatch(getAsyncCart())}
+  return {
+    getAsyncCart: () => dispatch(getAsyncCart()),
+    asyncBuy: id => dispatch(asyncBuy(id))
+  }
 }
 
 export default connect(mapStatetoProps, mapDispatchtoProps)(Cart)

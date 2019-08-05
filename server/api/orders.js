@@ -74,14 +74,14 @@ router.put('/', async (req, res, next) => {
   res.send(item)
 })
 
-router.get('/eager', async (req, res, next) => {
-  const order = await OrderItem.findOne({
-    where: {
-      orderId: 1
-    },
-    include: [{model: ProductType}]
+router.put('/buy', async (req, res, next) => {
+  const order = await Order.findOne({
+    where: {id: req.body.orderId} //send prop
   })
-  res.send(order)
+  await order.update({
+    completed: true
+  })
+  res.sendStatus(201) // send object?
 })
 
 // Store guest cart

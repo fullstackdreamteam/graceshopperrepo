@@ -1,6 +1,9 @@
 import axios from 'axios'
+import {createBrowserHistory} from 'history'
+export const history = createBrowserHistory()
 
 const GET_ORDERS = 'GET_ORDERS'
+const BUY = 'BUY'
 
 const userOrders = []
 
@@ -15,6 +18,12 @@ export const getAsyncOrders = () => {
   return async dispatch => {
     const {data} = await axios.get('/api/orders/pastOrders')
     dispatch(getOrders(data))
+  }
+}
+
+export const asyncBuy = id => {
+  return async dispatch => {
+    await axios.put('/api/orders/buy', id)
   }
 }
 

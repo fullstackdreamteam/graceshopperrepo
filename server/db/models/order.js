@@ -43,4 +43,12 @@ Order.prototype.calTotal = async function() {
   await this.save()
 }
 
+const newCart = async order => {
+  if (order.completed) {
+    await Order.create({userId: order.userId})
+  }
+}
+
+Order.afterUpdate(newCart)
+
 module.exports = Order
