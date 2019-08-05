@@ -14,12 +14,12 @@ class Cart extends Component {
   }
   render() {
     //  let productTypes = Array(cart.productTypes)
-    console.log(this.props.cart.id)
+
     //console.log(this.props.cart)
 
     return (
       <div>
-        <p>my Cart</p>
+        <h3>My Cart</h3>
         {this.props.cart.productTypes &&
           this.props.cart.productTypes.map(item => {
             return (
@@ -41,8 +41,12 @@ class Cart extends Component {
               <button
                 type="button"
                 onClick={() => {
-                  this.props.asyncBuy({orderId: this.props.cart.id})
-                  this.props.history.push('/completed')
+                  if (this.props.cart.productTypes.length === 0) {
+                    console.log('error')
+                  } else {
+                    this.props.asyncBuy({orderId: this.props.cart.id})
+                    this.props.history.push('/completed')
+                  }
                 }}
               >
                 BUY
