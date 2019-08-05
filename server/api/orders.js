@@ -35,10 +35,16 @@ router.get('/cart', async (req, res, next) => {
     },
     include: [{model: ProductType}]
   })
+  await items.calTotal()
+
   res.json(items)
 })
 
 router.put('/cart/updateQty', async (req, res, next) => {
+  const item = await Order.findOne({
+    where: {id: req.body.orderId},
+    include: [{model: ProductType}]
+  })
   const order = await OrderItem.findOne({
     where: {
       orderId: req.body.orderId,
@@ -48,18 +54,34 @@ router.put('/cart/updateQty', async (req, res, next) => {
   await order.update({
     quantity: req.body.quantity
   })
-  res.sendStatus(201)
+  await item.calTotal()
+  res.send(item)
 })
 
 router.put('/', async (req, res, next) => {
+  const item = await Order.findOne({
+    where: {id: req.body.orderId},
+    include: [{model: ProductType}]
+  })
   await OrderItem.destroy({
     where: {
       orderId: req.body.orderId,
       productTypeId: req.body.productTypeId
     }
   })
+  await item.calTotal()
+  // console.log(item)
+  res.send(item)
+})
 
-  res.sendStatus(201)
+router.get('/eager', async (req, res, next) => {
+  const order = await OrderItem.findOne({
+    where: {
+      orderId: 1
+    },
+    include: [{model: ProductType}]
+  })
+  res.send(order)
 })
 
 // Store guest cart
