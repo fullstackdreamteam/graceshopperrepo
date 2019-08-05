@@ -40,9 +40,10 @@ class Cart extends Component {
             <div>
               <button
                 type="button"
-                onClick={() =>
+                onClick={() => {
                   this.props.asyncBuy({orderId: this.props.cart.id})
-                }
+                  this.props.history.push('/completed')
+                }}
               >
                 BUY
               </button>

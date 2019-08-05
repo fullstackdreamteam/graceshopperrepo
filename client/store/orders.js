@@ -1,4 +1,6 @@
 import axios from 'axios'
+import {createBrowserHistory} from 'history'
+export const history = createBrowserHistory()
 
 const GET_ORDERS = 'GET_ORDERS'
 const BUY = 'BUY'
