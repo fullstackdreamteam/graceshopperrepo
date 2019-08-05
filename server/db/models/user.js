@@ -70,7 +70,7 @@ const setSaltAndPassword = user => {
 
 const autoCart = user => {
   Order.create({
-    userId: +user.id
+    userId: user.id
   })
 }
 
