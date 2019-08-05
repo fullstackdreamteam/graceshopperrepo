@@ -13,8 +13,12 @@ const getProducts = products => {
 
 export const getAsyncProducts = () => {
   return async dispatch => {
-    const {data} = await axios.get('/api/products/')
-    dispatch(getProducts(data))
+    try {
+      const {data} = await axios.get('/api/products/')
+      dispatch(getProducts(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 export default function(state = allProducts, action) {

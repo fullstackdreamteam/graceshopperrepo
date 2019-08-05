@@ -29,7 +29,13 @@ const EachProduct = props => {
           >
             <label>
               QTY:
-              <input type="number" name="qty" defaultValue={props.qty} />
+              <input
+                type="number"
+                name="qty"
+                defaultValue={props.qty}
+                min="1"
+                max="10"
+              />
               <button type="submit">Update</button>
             </label>
           </form>

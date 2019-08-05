@@ -47,7 +47,7 @@ class SingleProduct extends Component {
         <form onSubmit={this.clickHandler}>
           <label>
             QTY:
-            <input type="number" name="qty" />
+            <input type="number" name="qty" min="1" max="10" />
           </label>
           <button type="submit" id={this.props.singleProduct.id}>
             Add to Cart

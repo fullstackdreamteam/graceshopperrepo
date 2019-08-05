@@ -9,7 +9,11 @@ const OrderItem = db.define('order_item', {
   //   type: Sequelize.INTEGER
   // },
   quantity: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 1,
+      max: 50
+    }
   },
   price: {
     type: Sequelize.INTEGER

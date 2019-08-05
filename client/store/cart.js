@@ -31,21 +31,33 @@ const updateCartQtyAction = obj => {
 
 export const getAsyncCart = () => {
   return async dispatch => {
-    const {data} = await axios.get('/api/orders/cart')
-    dispatch(getCart(data))
+    try {
+      const {data} = await axios.get('/api/orders/cart')
+      dispatch(getCart(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 export const updateCartQty = object => {
   return async dispatch => {
-    const {data} = await axios.put('/api/orders/cart/updateQty', object)
-    dispatch(updateCartQtyAction(data))
+    try {
+      const {data} = await axios.put('/api/orders/cart/updateQty', object)
+      dispatch(updateCartQtyAction(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
 export const deleteCartItem = object => {
   return async dispatch => {
-    const {data} = await axios.put('/api/orders', object)
-    dispatch(deleteCartSingleItem(object.productTypeId, data))
+    try {
+      const {data} = await axios.put('/api/orders', object)
+      dispatch(deleteCartSingleItem(object.productTypeId, data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 export default function(state = userCart, action) {
