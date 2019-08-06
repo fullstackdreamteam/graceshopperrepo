@@ -20,18 +20,22 @@ class Products extends Component {
   render() {
     return (
       <div>
-        <h1>All Products</h1>
-        {this.props.products.map &&
-          this.props.products.map(product => {
-            return (
-              <div key={product.id}>
-                <EachProduct
-                  product={product}
-                  toggleDetail={this.toggleDetail}
-                />
-              </div>
-            )
-          })}
+        <div>
+          <h1>All Products</h1>
+        </div>
+        <div className="prod-cont">
+          {this.props.products.map &&
+            this.props.products.map(product => {
+              return (
+                <div className="prod-cont-child" key={product.id}>
+                  <EachProduct
+                    product={product}
+                    toggleDetail={this.toggleDetail}
+                  />
+                </div>
+              )
+            })}
+        </div>
       </div>
     )
   }

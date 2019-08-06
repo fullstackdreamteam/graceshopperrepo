@@ -34,7 +34,7 @@ class SingleProduct extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="single-prod">
         <p>{this.state.price}</p>
         <img src={this.props.singleProduct.imageUrl} style={{width: '50%'}} />
         <h3>
@@ -47,9 +47,13 @@ class SingleProduct extends Component {
         <form onSubmit={this.clickHandler}>
           <label>
             QTY:
-            <input type="number" name="qty" min="1" max="10" />
+            <input type="number" defaultValue="1" name="qty" min="1" max="10" />
           </label>
-          <button type="submit" id={this.props.singleProduct.id}>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            id={this.props.singleProduct.id}
+          >
             Add to Cart
           </button>
         </form>

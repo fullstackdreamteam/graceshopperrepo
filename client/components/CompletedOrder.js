@@ -5,7 +5,7 @@ export default class CompletedOrder extends Component {
     return (
       <div>
         <h1>Thank You for shopping with Boats-R-Us!</h1>
-        <Link to="/home">Continue Shopping</Link>
+        <Link to="/products">Continue Shopping</Link>
       </div>
     )
   }

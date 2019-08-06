@@ -16,17 +16,57 @@ class MyOrders extends Component {
     return (
       <div>
         <h1>My Past Orders</h1>
-        <table>
-          <tbody>
+        <table className="table">
+          <thead>
             <tr>
-              <th>Order #</th>
-              <th>Brand</th>
-              <th>Model Name</th>
-              <th>Length</th>
-              <th>Description</th>
-              <th>Price</th>
+              <th scope="col">Order #</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Model Name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
             </tr>
-            {orders.map &&
+          </thead>
+          <tbody>
+            {orders.map(order => {
+              let counter = 0
+              return order.productTypes.map(product => {
+                counter++
+                if (counter === order.productTypes.length) {
+                  return (
+                    <React.Fragment>
+                      <tr>
+                        <td>{order.id}</td>
+                        <td>{product.brand}</td>
+                        <td>{product.modelName}</td>
+                        <td>{product.order_item.quantity}</td>
+                        <td>{product.price * product.order_item.quantity}</td>
+                      </tr>
+
+                      <tr>
+                        <td />
+                        <td />
+                        <td />
+                        <td />
+                        <td>TOTAL: {order.total}</td>
+                      </tr>
+                    </React.Fragment>
+                  )
+                } else {
+                  return (
+                    <React.Fragment>
+                      <tr>
+                        <td>{order.id}</td>
+                        <td>{product.brand}</td>
+                        <td>{product.modelName}</td>
+                        <td>{product.order_item.quantity}</td>
+                        <td>{product.price * product.order_item.quantity}</td>
+                      </tr>
+                    </React.Fragment>
+                  )
+                }
+              })
+            })}
+            {/* {orders.map &&
               orders.map(order => {
                 return (
                   <tr key={order.id}>
@@ -36,15 +76,14 @@ class MyOrders extends Component {
                         <div key={product.id}>
                           <td>{product.brand}</td>
                           <td>{product.modelName}</td>
-                          <td>{product.length}</td>
-                          <td>{product.description}</td>
+
                           <td>{product.price}</td>
                         </div>
                       )
                     })}
                   </tr>
                 )
-              })}
+              })} */}
           </tbody>
         </table>
       </div>
