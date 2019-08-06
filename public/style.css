@@ -35,7 +35,8 @@ form div {
   background-repeat: no-repeat;
 }
 .right-cont {
-  padding: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
   float: right;
 }
 .right-box {
@@ -47,10 +48,68 @@ form div {
   background-color: rgb(45, 45, 45, 0.2);
 }
 
-.right-box p,
-h4 {
+.right-box p {
+  color: white;
+}
+.right-box h4 {
   color: white;
 }
 
-.button-home {
+.logo-header {
+  padding-bottom: 20px;
+}
+
+.logo-header img {
+  width: 70%;
+  float: right;
+  padding-bottom: 15px;
+}
+
+.footer {
+  height: 100%;
+  background-color: #1251a0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.footer-box {
+  height: 100%;
+  width: 33%;
+  padding: 20px;
+  margin: 20px;
+  padding-bottom: 10px;
+}
+
+.footer-box p {
+  color: white;
+}
+
+.footer-box h4 {
+  padding-bottom: 10px;
+  color: white;
+}
+
+.prod-cont {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.prod-cont-child {
+  width: 33%;
+  padding-bottom: 20px;
+}
+
+.prod-cont-child h4 {
+  color: black;
+}
+
+.single-prod h1,
+h2,
+h3,
+h4,
+h5 {
+  color: black;
 }

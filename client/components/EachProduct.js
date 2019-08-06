@@ -11,9 +11,7 @@ const EachProduct = props => {
       </h3>
       <h4>Length: {product.length}</h4>
       <h4>Price: {product.price}</h4>
-      <button type="button" id={product.id} onClick={props.toggleDetail}>
-        More Details
-      </button>
+
       {props.isCart ? (
         <div>
           <form
@@ -57,7 +55,16 @@ const EachProduct = props => {
           </button>
         </div>
       ) : (
-        <div />
+        <div>
+          <button
+            className="btn btn-primary"
+            type="button"
+            id={product.id}
+            onClick={props.toggleDetail}
+          >
+            More Details
+          </button>
+        </div>
       )}
     </div>
   )
