@@ -20,39 +20,46 @@ class Cart extends Component {
     return (
       <div>
         <h3>My Cart</h3>
-        {this.props.cart.productTypes &&
-          this.props.cart.productTypes.map(item => {
-            return (
-              <EachProduct
-                key={item.id}
-                product={item}
-                isCart={true}
-                qty={item.order_item.quantity}
-                cart={this.props.cart}
-              />
-            )
-          })}
-        <div />
+        <div className="row">
+          <div />
+          {this.props.cart.productTypes &&
+            this.props.cart.productTypes.map(item => {
+              return (
+                <div className="col">
+                  <EachProduct
+                    key={item.id}
+                    product={item}
+                    isCart={true}
+                    qty={item.order_item.quantity}
+                    cart={this.props.cart}
+                  />
+                </div>
+              )
+            })}
+        </div>
         <div>
-          <h3>
-            Total Price:
-            {this.props.cart.total}
-            <div>
-              <button
-                type="button"
-                onClick={() => {
-                  if (this.props.cart.productTypes.length === 0) {
-                    console.log('error')
-                  } else {
-                    this.props.asyncBuy({orderId: this.props.cart.id})
-                    this.props.history.push('/completed')
-                  }
-                }}
-              >
-                BUY
-              </button>
-            </div>
-          </h3>
+          <div>
+            <h3>
+              Total Price:
+              {this.props.cart.total}
+            </h3>
+          </div>
+          <div>
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={() => {
+                if (this.props.cart.productTypes.length === 0) {
+                  console.log('error')
+                } else {
+                  this.props.asyncBuy({orderId: this.props.cart.id})
+                  this.props.history.push('/completed')
+                }
+              }}
+            >
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
     )

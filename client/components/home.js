@@ -44,7 +44,8 @@ const Home = () => {
               <div className="card-body">
                 <p className="card-text">
                   Fishing boats for the fishing enthusiast in you. Check out our
-                  wide variety of models.
+                  wide variety of models. We're confident that we carry what
+                  your looking for.
                 </p>
               </div>
             </div>
