@@ -23,11 +23,11 @@ class Products extends Component {
         <div>
           <h1>All Products</h1>
         </div>
-        <div className="prod-cont">
+        <div className="row">
           {this.props.products.map &&
             this.props.products.map(product => {
               return (
-                <div className="prod-cont-child" key={product.id}>
+                <div className="col" key={product.id}>
                   <EachProduct
                     product={product}
                     toggleDetail={this.toggleDetail}

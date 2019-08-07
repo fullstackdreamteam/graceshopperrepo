@@ -34,29 +34,64 @@ class SingleProduct extends Component {
   }
   render() {
     return (
-      <div className="single-prod">
-        <p>{this.state.price}</p>
-        <img src={this.props.singleProduct.imageUrl} style={{width: '50%'}} />
-        <h3>
+      // <div className="card" style={{width: '23.5rem'}}>
+      // <h5 className="card-header">
+      //   {product.brand} {product.modelName}
+      // </h5>
+      // <img src={product.imageUrl} className="card-img-top" />
+      // <div className="card-body">
+      //   <div className="card-text">
+      //     <h5>Length: {product.length}</h5>
+      //     <h5>Price: {product.price}</h5>
+      //     {props.isCart ? (
+      //       <div>
+      //     <ul class="list-group list-group-flush">
+      //   <li class="list-group-item">Cras justo odio</li>
+      //   <li class="list-group-item">Dapibus ac facilisis in</li>
+      //   <li class="list-group-item">Vestibulum at eros</li>
+      // </ul>
+      <div className="card">
+        <h5 className="card-header">
           {this.props.singleProduct.brand} {this.props.singleProduct.modelName}
-        </h3>
-        <h4>Length: {this.props.singleProduct.length}</h4>
-        <h4>Price: {this.props.singleProduct.price}</h4>
-        <h5>Description:</h5>
-        <h5>{this.props.singleProduct.description}</h5>
-        <form onSubmit={this.clickHandler}>
-          <label>
-            QTY:
-            <input type="number" defaultValue="1" name="qty" min="1" max="10" />
-          </label>
-          <button
-            className="btn btn-primary"
-            type="submit"
-            id={this.props.singleProduct.id}
-          >
-            Add to Cart
-          </button>
-        </form>
+        </h5>
+        <p>{this.state.price}</p>
+        <center>
+          <img src={this.props.singleProduct.imageUrl} style={{width: '50%'}} />
+        </center>
+        <div className="card-body">
+          <ul clasName="list-group list-group-flush">
+            <li className="list-group-item">
+              {this.props.singleProduct.description}
+            </li>
+            <li className="list-group-item">
+              Length: {this.props.singleProduct.length}
+            </li>
+            <li className="list-group-item">
+              Price: {this.props.singleProduct.price}
+            </li>
+          </ul>
+          <div className="card-body">
+            <form onSubmit={this.clickHandler}>
+              <label>
+                QTY:
+                <input
+                  type="number"
+                  defaultValue="1"
+                  name="qty"
+                  min="1"
+                  max="10"
+                />
+              </label>
+              <button
+                className="btn btn-outline-success"
+                type="submit"
+                id={this.props.singleProduct.id}
+              >
+                Add to Cart
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     )
   }
